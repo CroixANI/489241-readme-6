@@ -9,7 +9,9 @@
 * [Конфигурация приложений](#configuration)  
   * [API Gateway](#api-config)  
   * [Account](#account-config)  
+    * [Seed пользователей](#account-seed)  
   * [Blog](#blog-config)  
+    * [Seed данных](#blog-seed)
   * [File Vault](#file-vault-config)  
   * [Notify](#notify-config)  
 
@@ -133,6 +135,8 @@ nx run notify:serve
 * `RABBIT_QUEUE` - название очереди
 * `RABBIT_EXCHANGE` - название exchange
 
+<a name="account-seed"/>
+
 ### Заполнение БД первыми данными
 
 Пример конфигурации для `project/libs/account/blog-user/src/lib/seed/seed.ts` лежит в файле `project/libs/blog/models/prisma/.env-example` нужно указать следующие данные
@@ -158,7 +162,11 @@ nx run notify:serve
 
 * `DATABASE_URL` - URL для соединения с PostgreSQL. Как пример `postgres://postgres:postgres@postgresdb:5432/readme-blog`
 
-После этого можно будет запускать следущие команды
+<a name="account-seed"/>
+
+# Заполенение БД первыми данными
+
+После настройки переменных окружения для Prisma можно будет запускать следущие команды
 
 * `nx run blog:db-validate` - проверяет схему описанную в файле `project/libs/blog/models/prisma/schema.prisma`
 * `nx run blog:db-migrate` - запускает миграции

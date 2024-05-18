@@ -26,7 +26,8 @@
 				"mtxr.sqltools-driver-pg",
 				"humao.rest-client",
         "ms-azuretools.vscode-docker",
-        "Prisma.prisma"
+        "Prisma.prisma",
+        "bierner.markdown-mermaid"
 			]
 		}
 	},

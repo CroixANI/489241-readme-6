@@ -4,6 +4,11 @@ export enum AuthenticationErrors {
   WrongPassword = 'User password is wrong'
 }
 
+export enum PasswordLimits {
+  Min = 6,
+  Max = 12,
+}
+
 export enum AuthenticationResponseMessage {
   LoggedSuccess = 'User has been successfully logged',
   LoggedError = 'Password or Login is wrong',

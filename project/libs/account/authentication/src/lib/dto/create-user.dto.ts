@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsISO8601, IsString, MaxLength, MinLength } from 'class-validator';
 
 import { UserPropertiesDescription, UserPropertiesValidationErrors } from "../rdo/user.constants";
+import { PasswordLimits } from "../authentication.constants";
 
 export class CreateUserDto {
   @ApiProperty({
@@ -46,7 +47,7 @@ export class CreateUserDto {
     example: 'secret password!'
   })
   @IsString()
-  @MinLength(6, { message: UserPropertiesValidationErrors.MinPasswordLength })
-  @MaxLength(12, { message: UserPropertiesValidationErrors.MaxPasswordLength })
+  @MinLength(PasswordLimits.Min, { message: UserPropertiesValidationErrors.MinPasswordLength })
+  @MaxLength(PasswordLimits.Max, { message: UserPropertiesValidationErrors.MaxPasswordLength })
   public password: string;
 }
