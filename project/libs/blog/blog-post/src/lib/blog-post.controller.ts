@@ -131,4 +131,17 @@ export class BlogPostController {
   public async rePost(@Param('postId', ParseUUIDPipe) postId: string, @Param('userId', MongoIdValidationPipe) userId: string) {
     return await this.blogPostService.rePost(postId, userId);
   }
+
+  @Get('/later/:date')
+  @ApiOperation({ summary: BlogPostOperationDescription.FindCreatedAfterDate })
+  @ApiParam({ name: "date", required: true, type: "date", description: BlogPostPropertiesDescription.CreateAt })
+  @ApiOkResponse({
+    type: BlogPostRdo,
+    description: BlogPostResponseMessage.FindCreatedAfterDate,
+    isArray: true,
+  })
+  public async findCreatedAfterDate(@Query('date') date: Date) {
+    const posts = await this.blogPostService.findCreatedAfterDate(date);
+    return posts.map(post => fillDto(BlogPostRdo, post.toPOJO()));
+  }
 }

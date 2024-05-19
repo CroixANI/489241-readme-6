@@ -197,6 +197,15 @@ export class BlogPostRepository extends BasePostgresRepository<BlogPostEntity, P
     return this.createEntityFromDocument(record);
   }
 
+  public async findCreatedAfterDate(date: Date): Promise<BlogPostEntity[]> {
+    const posts = await this.client.post.findMany({
+      where: { createdAt: { gt: date }, state: PostState.Published },
+      include: { comments: true, categories: true }
+    });
+
+    return posts.map(post => this.createEntityFromDocument(post));
+  }
+
   private setSortPropertyAndDirection(query: BlogPostQuery, orderBy: Prisma.PostOrderByWithRelationInput) {
     if (query?.sortProperty == BlogPostSortByType.CreatedBy) {
       orderBy.createdAt = query.sortDirection;

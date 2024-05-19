@@ -144,4 +144,8 @@ export class BlogPostService {
 
     return await this.blogPostRepository.rePost(existsPost, userId);
   }
+
+  public async findCreatedAfterDate(date: Date) {
+    return await this.blogPostRepository.findCreatedAfterDate(date);
+  }
 }

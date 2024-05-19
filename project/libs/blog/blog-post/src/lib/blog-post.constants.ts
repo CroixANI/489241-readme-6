@@ -53,6 +53,7 @@ export enum BlogPostOperationDescription {
   AddLikeToBlogPost = 'Adds like to specified blog post',
   PublishBlogPost = 'Publish blog post',
   RePostBlogPost = 'Re-post blog post',
+  FindCreatedAfterDate = 'Gets all published blog posts created after specified date',
 }
 
 export enum BlogPostResponseMessage {
@@ -61,6 +62,7 @@ export enum BlogPostResponseMessage {
   ListsBlogPosts = 'Returns blog posts list in response body',
   CreateCommentForBlogId = 'Blog comment was created and details returned in response body',
   RePostedBlogPost = 'Blog post was re-posted',
+  FindCreatedAfterDate = 'Returns all published blog posts created after specified date',
 }
 
 export enum BlogPostResponseError {

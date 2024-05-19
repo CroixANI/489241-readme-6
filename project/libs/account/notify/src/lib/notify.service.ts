@@ -6,6 +6,7 @@ import { RabbitRouting } from '@project/shared-core';
 import { messageQueueConfig } from '@project/message-queue';
 
 import { CreateSubscriberDto } from './dto/create-subscriber.dto';
+import { NewPostsDto } from './dto/new-posts.dto';
 
 @Injectable()
 export class NotifyService {
@@ -19,6 +20,14 @@ export class NotifyService {
     return this.rabbitClient.publish<CreateSubscriberDto>(
       this.rabbiOptions.exchange,
       RabbitRouting.AddSubscriber,
+      { ...dto }
+    );
+  }
+
+  public async notifyNewPosts(dto: NewPostsDto) {
+    return this.rabbitClient.publish<NewPostsDto>(
+      this.rabbiOptions.exchange,
+      RabbitRouting.NewPosts,
       { ...dto }
     );
   }

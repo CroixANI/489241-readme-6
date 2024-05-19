@@ -22,6 +22,7 @@ export enum BlogPostOperationDescription {
   ListBlogPostsByUser = 'Lists blog posts for user based on search criteria',
   PublishBlogPost = 'Publish blog post',
   RePostBlogPost = 'Re-post blog post',
+  NewBlogPostsNotification = 'New blog posts notification',
 }
 
 export enum BlogPostResponseMessage {

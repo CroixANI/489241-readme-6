@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -13,9 +12,9 @@ import { EmailNewsModel } from '../models/email-news.model';
 export class EmailNewsRepository extends BaseMongoRepository<EmailNewsEntity, EmailNewsModel> {
   constructor(
     entityFactory: EmailNewsFactory,
-    @InjectModel(EmailNewsModel.name) emailSubscriberModel: Model<EmailNewsModel>
+    @InjectModel(EmailNewsModel.name) emailNewsModel: Model<EmailNewsModel>
     ) {
-    super(entityFactory, emailSubscriberModel);
+    super(entityFactory, emailNewsModel);
   }
 
   public async findLatest(): Promise<EmailNewsEntity | null> {

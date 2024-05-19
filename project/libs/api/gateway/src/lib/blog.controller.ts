@@ -6,12 +6,16 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiResponse,
 import { apiConfig, BlogEndpoints } from '@project/api-configuration';
 import { InjectUserIdInterceptor } from '@project/shared-interceptors';
 import { BlogPostWithPaginationRdo, BlogPostQuery } from '@project/blog-post';
+import { RequestWithUser } from '@project/authentication';
+import { Post as BlogPost } from '@project/shared-core';
+import { EmailNewsRdo } from '@project/email-news';
 
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { CheckAuthGuard } from './guards/check-auth.guard';
 import { AddNewPostDto } from './dto/add-new-post.dto';
 import { BlogPostOperationDescription, BlogPostPropertiesDescription, BlogPostResponseError, BlogPostResponseMessage } from './blog.constants';
-import { RequestWithUser } from '@project/authentication';
+import { NotifyEndpoints } from 'libs/api/configuration/src/lib/api-configuration.const';
+import { NotifyService } from '@project/account-notify';
 
 @ApiTags('blog')
 @Controller('blog')
@@ -21,6 +25,7 @@ export class BlogController {
     @Inject(apiConfig.KEY)
     private readonly config: ConfigType<typeof apiConfig>,
     private readonly httpService: HttpService,
+    private readonly notifyService: NotifyService,
   ) {}
 
   @Post('/')
@@ -137,5 +142,32 @@ export class BlogController {
       }
     });
     return data;
+  }
+
+  @Patch('/news-notify')
+  @ApiOperation({ summary: BlogPostOperationDescription.NewBlogPostsNotification })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  public async newPostsNotification(@Headers() headers) {
+    // get last new blog post notification data
+    const lastNotificationUrl = this.config.getNotifyUrl(NotifyEndpoints.GetLastNotificationDate);
+    const lastNotificationResponse = await this.httpService.axiosRef.get<EmailNewsRdo>(`${lastNotificationUrl}`, {
+      headers: {
+        'X-Request-Id': headers['X-Request-Id'],
+      }
+    });
+
+    // get all blog posts created after last new blog post notification
+    const findCreatedAfterDateUrl = this.config.getBlogUrl(BlogEndpoints.FindCreatedAfterDate);
+    const laterUrl = `${findCreatedAfterDateUrl}/${lastNotificationResponse.data.sentDate}`;
+    const response = await this.httpService.axiosRef.get<BlogPost[]>(laterUrl, {
+      headers: {
+        'X-Request-Id': headers['X-Request-Id'],
+      }
+    });
+
+    // send message into MQ about new blog posts to notify about
+    await this.notifyService.notifyNewPosts({
+      newPosts: response.data
+    });
   }
 }

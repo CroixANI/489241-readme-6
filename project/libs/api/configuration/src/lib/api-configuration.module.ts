@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { messageQueueConfig } from '@project/message-queue';
+
 import apiApplicationConfig from './api-configuration.config'
 import { ApiConfigurationEnvFilePath } from './api-configuration.const';
 
@@ -9,7 +11,7 @@ import { ApiConfigurationEnvFilePath } from './api-configuration.const';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [apiApplicationConfig],
+      load: [apiApplicationConfig, messageQueueConfig],
       envFilePath: ApiConfigurationEnvFilePath
     }),
   ]

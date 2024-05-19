@@ -2,7 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ArrayNotEmpty } from 'class-validator';
 
 import { Post } from '@project/shared-core';
-import { EmailNewsErrors, EmailNewsProperties } from '../email-news.const';
+
+import { EmailNewsErrors, EmailNewsProperties } from '../notify.const';
 
 export class NewPostsDto {
   @ApiProperty({

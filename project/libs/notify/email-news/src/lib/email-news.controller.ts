@@ -5,7 +5,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RabbitRouting } from '@project/shared-core';
 
 import { EmailNewsService } from './email-news.service';
-import { NewPostsDto } from './dto/new-posts.dto';
+import { NewPostsDto } from '../../../../account/notify/src/lib/dto/new-posts.dto';
 import { NewPostsOperationDescription, NewPostsResponseMessage } from './email-news.const';
 import { EmailNewsRdo } from './rdo/email-news.rdo';
 import { fillDto } from '@project/shared-helpers';

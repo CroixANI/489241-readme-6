@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
 
+import { NotifyModule } from '@project/account-notify';
 import { ApiConfigurationModule, getHttpClientOptions } from '@project/api-configuration';
 
 import { UsersController } from './users.controller';
@@ -15,7 +16,8 @@ import { BlogController } from './blog.controller';
       imports: [ApiConfigurationModule],
       useFactory: getHttpClientOptions,
       inject: [ConfigService],
-    })
+    }),
+    NotifyModule
   ],
   controllers: [
     UsersController,
@@ -23,6 +25,6 @@ import { BlogController } from './blog.controller';
   ],
   providers: [
     CheckAuthGuard,
-  ],
+  ]
 })
 export class ApiGatewayModule {}

@@ -1,7 +1,7 @@
 import { IsEnum, IsNumber, IsOptional, IsString, Max, Min, validateOrReject } from 'class-validator';
 
 import { Environments } from '@project/shared-core';
-import { ApiConfigurationPorts, ApiConfigurationErrors, BlogEndpoints, AccountEndpoints } from './api-configuration.const';
+import { ApiConfigurationPorts, ApiConfigurationErrors, BlogEndpoints, AccountEndpoints, NotifyEndpoints } from './api-configuration.const';
 
 export class ApiEnvironmentConfiguration {
   @IsString({ message: ApiConfigurationErrors.EnvironmentRequired })
@@ -20,6 +20,9 @@ export class ApiEnvironmentConfiguration {
   @IsString({ message: ApiConfigurationErrors.AccountBaseUrlRequired })
   public baseAccountUrl: string;
 
+  @IsString({ message: ApiConfigurationErrors.NotifyBaseUrlRequired })
+  public baseNotifyUrl: string;
+
   @IsNumber({}, { message: ApiConfigurationErrors.HttpClientTimeoutIsRequired })
   public httpClientTimeout: number;
 
@@ -36,5 +39,9 @@ export class ApiEnvironmentConfiguration {
 
   public getAccountUrl(accountEndpoint: AccountEndpoints): string {
     return `${this.baseAccountUrl}/${accountEndpoint}`
+  }
+
+  public getNotifyUrl(notifyEndpoint: NotifyEndpoints) {
+    return `${this.baseNotifyUrl}/${notifyEndpoint}`
   }
 }

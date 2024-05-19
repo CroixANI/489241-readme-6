@@ -18,6 +18,7 @@ export enum ApiConfigurationErrors {
   PortRequired = 'Account port is required',
   BlogBaseUrlRequired = 'Blog service base URL is required',
   AccountBaseUrlRequired = 'Account service base URL is required',
+  NotifyBaseUrlRequired = 'Notify service base URL is required',
   HttpClientTimeoutIsRequired = 'HTTP client timeout is required',
   HttpClientMaxRedirectsIsRequired = 'HTTP client max redirects is required',
 }
@@ -27,10 +28,15 @@ export enum BlogEndpoints {
   LikeBlogPost = 'like',
   PublishBlogPost = 'publish',
   RePostBlogPost = 'repost',
+  FindCreatedAfterDate = 'posts/later',
 }
 
 export enum AccountEndpoints {
   LoginUser = 'auth/login',
   RefreshTokens = 'auth/refresh',
   CheckUser = 'auth/check',
+}
+
+export enum NotifyEndpoints {
+  GetLastNotificationDate = 'last',
 }
