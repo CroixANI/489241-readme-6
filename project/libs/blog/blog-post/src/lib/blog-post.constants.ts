@@ -16,6 +16,7 @@ export enum BlogPostPropertiesDescription {
   QueryPostType = 'Blog post type',
   QueryPostAuthor = 'Blog post Author Id',
   QueryPostState = 'Blog post state',
+  SearchByTitle = 'Search by title'
 }
 
 export enum BlogPostsWithPagingPropertiesDescription {
@@ -38,6 +39,7 @@ export enum BlogPostValidationMessages {
 export enum BlogPostQueryDefaults {
   DefaultCountLimit = 25,
   DefaultPageCount = 1,
+  DefaultSearchByTitleLimit = 20
 }
 
 export enum BlogPostOperationDescription {

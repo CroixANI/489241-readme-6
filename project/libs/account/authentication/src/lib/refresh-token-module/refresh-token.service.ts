@@ -1,6 +1,6 @@
+import dayjs from 'dayjs';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import dayjs from 'dayjs';
 
 import { jwtConfig } from '@project/account-configuration';
 import { RefreshTokenPayload } from '@project/shared-core';
