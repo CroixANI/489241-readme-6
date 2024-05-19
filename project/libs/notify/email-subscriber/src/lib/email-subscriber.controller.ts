@@ -1,12 +1,14 @@
 import { Controller } from '@nestjs/common';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
+import { ApiTags } from '@nestjs/swagger';
 
 import { RabbitRouting } from '@project/shared-core';
-import { MailService } from './mail.service';
 
+import { MailService } from './mail.service';
 import { EmailSubscriberService } from './email-subscriber.service';
 import { CreateSubscriberDto } from './dto/create-subscriber.dto';
 
+@ApiTags('notify')
 @Controller()
 export class EmailSubscriberController {
   constructor(

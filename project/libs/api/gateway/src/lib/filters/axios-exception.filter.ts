@@ -6,7 +6,7 @@ import { CommonErrors } from '../users.constants';
 
 @Catch(AxiosError)
 export class AxiosExceptionFilter implements ExceptionFilter {
-  private readonly logger = new Logger('AxiosExceptionFilter');
+  private readonly logger = new Logger(AxiosExceptionFilter.name);
 
   catch(error: AxiosError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

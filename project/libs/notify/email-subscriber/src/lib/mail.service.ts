@@ -2,7 +2,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 
-import { Subscriber } from '@project/shared-core';
+import { Post, Subscriber } from '@project/shared-core';
 import { EmailConfig } from '@project/email-config';
 
 import { EmailSubjects } from './mail.const';
@@ -25,5 +25,15 @@ export class MailService {
         email: `${subscriber.email}`,
       }
     })
+  }
+
+  public async sendNotificationAboutNewPosts(subscribers: Subscriber[], newPosts: Post[]) {
+    await this.mailerService.sendMail({
+      from: this.emailConfig.from,
+      to: subscribers.map(subscriber => subscriber.email),
+      subject: EmailSubjects.NewPosts,
+      template: './new-posts',
+      context: { newPosts }
+    });
   }
 }

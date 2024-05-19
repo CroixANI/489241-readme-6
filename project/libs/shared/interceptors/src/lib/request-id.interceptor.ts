@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 
 export class RequestIdInterceptor implements NestInterceptor {
-  private readonly logger = new Logger('RequestIdInterceptor');
+  private readonly logger = new Logger(RequestIdInterceptor.name);
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const requestId = crypto.randomUUID();
