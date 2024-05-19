@@ -4,3 +4,4 @@ export { EmailSubscriberRepository } from './lib/entities/email-subscriber.repos
 export { EmailSubscriberFactory } from './lib/entities/email-subscriber.factory';
 export { EmailSubscriberService } from './lib/email-subscriber.service';
 export { MailService } from './lib/mail.service';
+export { EmailSubscriberSchema, EmailSubscriberModel } from './lib/models/email-subscriber.model';

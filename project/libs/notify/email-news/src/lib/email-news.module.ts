@@ -15,7 +15,7 @@ import { MailModule } from '@project/email-subscriber';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: EmailNewsModel.name, schema: EmailNewsSchema }
+      { name: EmailNewsModel.name, schema: EmailNewsSchema },
     ]),
     RabbitMQModule.forRootAsync(
       RabbitMQModule,

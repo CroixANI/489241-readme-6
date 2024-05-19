@@ -1,3 +1,5 @@
+export const MIN_DATE = '1970-01-01';
+
 export enum EmailNewsErrors {
   NewPostsIsRequired = 'Lists of new blog posts should not be empty',
 }

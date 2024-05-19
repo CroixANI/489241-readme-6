@@ -6,6 +6,7 @@ import { EmailSubscriberRepository, MailService } from '@project/email-subscribe
 
 import { EmailNewsEntity } from './entities/email-news.entity';
 import { EmailNewsRepository } from './entities/email-news.repository';
+import { MIN_DATE } from './email-news.const';
 
 @Injectable()
 export class EmailNewsService {
@@ -18,7 +19,11 @@ export class EmailNewsService {
   ) { }
 
   public async findLatest() : Promise<EmailNewsEntity | null> {
-    return await this.emailNewsRepository.findLatest();
+    const data = await this.emailNewsRepository.findLatest();
+    if (! data) {
+      return new EmailNewsEntity({ sentDate: dayjs(MIN_DATE).toDate()})
+    }
+    return data;
   }
 
   public async sendNotificationAboutNewPosts(newPosts: Post[]) {

@@ -21,11 +21,7 @@ export class EmailNewsRepository extends BaseMongoRepository<EmailNewsEntity, Em
   public async findLatest(): Promise<EmailNewsEntity | null> {
     const document = await this.model.findOne().sort({ sentDate: -1 }).exec();
     if (!document) {
-      const newEntity = new EmailNewsEntity({ sentDate: dayjs().toDate() });
-
-      await this.save(newEntity);
-
-      return newEntity;
+      return null;
     }
 
     return this.createEntityFromDocument(document);

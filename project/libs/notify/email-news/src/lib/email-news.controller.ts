@@ -30,10 +30,13 @@ export class EmailNewsController {
   @ApiOperation({ summary: NewPostsOperationDescription.LastNotification })
   @ApiOkResponse({
     description: NewPostsResponseMessage.LastNotification,
-    type: EmailNewsRdo
+    type: EmailNewsRdo,
   })
-  public async getLastNewsletterDate() {
+  public async getLastNotificationDate() : Promise<EmailNewsRdo | null>{
     const entity = await this.emailNewsService.findLatest();
+    if (! entity) {
+      return null;
+    }
     return fillDto(EmailNewsRdo, { ...entity.toPOJO() });
   }
 }
